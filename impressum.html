@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Impressum – Dennis Peterschun</title>
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Schriften liegen lokal unter /fonts/. Es wird nichts von
+     fremden Servern geladen. */
+  @font-face{font-family:"Inter";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/inter-latin-400.woff2") format("woff2")}
+  @font-face{font-family:"Inter";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/inter-latin-500.woff2") format("woff2")}
+  @font-face{font-family:"Inter";font-style:normal;font-weight:600;font-display:swap;src:url("/fonts/inter-latin-600.woff2") format("woff2")}
+
   :root{--white:#FFFFFF;--ink:#1D1D1F;--muted:#6E6E73;--line:#D2D2D7}
   *,*::before,*::after{box-sizing:border-box}
   body{margin:0;background:var(--white);color:var(--ink);font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;line-height:1.65;letter-spacing:-0.011em}
@@ -64,7 +67,7 @@
   <p>Die Inhalte dieser Seiten wurden mit Sorgfalt erstellt. Für ihre Richtigkeit, Vollständigkeit und Aktualität kann ich keine Gewähr übernehmen. Die auf dieser Website genannten Beispielrechnungen sind Modellrechnungen zur Veranschaulichung und stellen keine Zusage eines bestimmten Ergebnisses dar.</p>
 
   <h2>Haftung für Links</h2>
-  <p>Diese Website enthält keine Links auf fremde Websites. Sollten künftig externe Verweise ergänzt werden, sind für deren Inhalte ausschließlich die jeweiligen Betreiber verantwortlich. Rechtswidrige Inhalte sind zum Zeitpunkt einer Verlinkung nicht erkennbar; werden mir solche bekannt, entferne ich den Link unverzüglich.</p>
+  <p>Diese Website enthält Links auf fremde Websites. Für deren Inhalte sind ausschließlich die jeweiligen Betreiber verantwortlich. Rechtswidrige Inhalte sind zum Zeitpunkt einer Verlinkung nicht erkennbar; werden mir solche bekannt, entferne ich den Link unverzüglich.</p>
 
   <h2>Urheberrecht</h2>
   <p>Die auf diesen Seiten erstellten Inhalte, Texte und Gestaltungselemente unterliegen dem deutschen Urheberrecht. Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedürfen meiner schriftlichen Zustimmung. Downloads und Kopien dieser Seite sind für den privaten, nicht kommerziellen Gebrauch gestattet.</p>

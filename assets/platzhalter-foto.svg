@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Platzhalter fuer das Foto">
+  <rect width="400" height="400" fill="#EAEAEF"/>
+  <circle cx="200" cy="158" r="62" fill="#D2D2D7"/>
+  <path d="M200 240c-72 0-130 46-130 104v56h260v-56c0-58-58-104-130-104z" fill="#D2D2D7"/>
+  <text x="200" y="378" text-anchor="middle" font-family="-apple-system, sans-serif" font-size="22" fill="#A1A1A6">Foto</text>
+</svg>

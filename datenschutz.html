@@ -5,10 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Datenschutzerklärung – Dennis Peterschun</title>
 <meta name="robots" content="noindex">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* Schriften liegen lokal unter /fonts/. Es wird nichts von
+     fremden Servern geladen. */
+  @font-face{font-family:"Inter";font-style:normal;font-weight:400;font-display:swap;src:url("/fonts/inter-latin-400.woff2") format("woff2")}
+  @font-face{font-family:"Inter";font-style:normal;font-weight:500;font-display:swap;src:url("/fonts/inter-latin-500.woff2") format("woff2")}
+  @font-face{font-family:"Inter";font-style:normal;font-weight:600;font-display:swap;src:url("/fonts/inter-latin-600.woff2") format("woff2")}
+
   :root{--white:#FFFFFF;--ink:#1D1D1F;--muted:#6E6E73;--line:#D2D2D7}
   *,*::before,*::after{box-sizing:border-box}
   body{margin:0;background:var(--white);color:var(--ink);font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;font-size:17px;line-height:1.65;letter-spacing:-0.011em}
