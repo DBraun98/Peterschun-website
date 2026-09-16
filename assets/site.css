@@ -256,19 +256,21 @@ img{max-width:100%;height:auto;display:block}
   grid-template-columns:1.9rem 1fr;
   gap:0 1rem;
   padding-block:1.5rem;
-  border-top:1px solid var(--line-dark);
+  border-top:1px solid var(--line);
 }
-.steps li:last-child{border-bottom:1px solid var(--line-dark)}
+.steps li:last-child{border-bottom:1px solid var(--line)}
 .steps li::before{
   content:counter(s);
   font-size:.92rem;
   font-weight:500;
-  color:var(--muted-dark);
+  color:var(--muted);
   font-variant-numeric:tabular-nums;
   padding-top:.28rem;
 }
 .steps b{grid-column:2;display:block;font-weight:600;font-size:1.08rem;letter-spacing:-0.019em;margin-bottom:.3rem}
-.steps span{grid-column:2;color:var(--muted-dark);font-size:1rem}
+.steps span{grid-column:2;color:var(--muted);font-size:1rem}
+.sec-dark .steps li{border-color:var(--line-dark)}
+.sec-dark .steps li::before,.sec-dark .steps span{color:var(--muted-dark)}
 
 .pricetag{
   display:block;
@@ -284,10 +286,10 @@ img{max-width:100%;height:auto;display:block}
   font-size:.9rem;
   font-weight:400;
   letter-spacing:-0.011em;
-  color:var(--muted-dark);
+  color:var(--muted);
   margin-top:.5rem;
 }
-.sec-grey .pricetag i,.sec-light .pricetag i{color:var(--muted)}
+.sec-dark .pricetag i{color:var(--muted-dark)}
 
 /* ================= Zwei Wege ================= */
 .pair{display:grid;gap:2.5rem;max-width:44rem;margin-inline:auto;text-align:left}
@@ -314,6 +316,12 @@ img{max-width:100%;height:auto;display:block}
 }
 .facts li:last-child{border-bottom:1px solid var(--line)}
 .facts b{font-weight:500;color:var(--ink);text-align:right}
+/* Auf schmalen Geraeten Wert unter die Bezeichnung, damit Preise
+   nicht mitten in der Zahl umbrechen. */
+@media (max-width:30rem){
+  .facts li{flex-direction:column;gap:.15rem}
+  .facts b{text-align:left}
+}
 
 /* ================= Leistungsliste (Website-Paket) ================= */
 .feats{
@@ -325,14 +333,22 @@ img{max-width:100%;height:auto;display:block}
 }
 .feats li{
   padding-block:1.05rem;
-  border-top:1px solid var(--line-dark);
+  border-top:1px solid var(--line);
   font-size:1.08rem;
   font-weight:500;
   letter-spacing:-0.017em;
   line-height:1.35;
 }
-.feats li:last-child{border-bottom:1px solid var(--line-dark)}
-.sec-grey .feats li,.sec-light .feats li{border-color:var(--line)}
+.feats li:last-child{border-bottom:1px solid var(--line)}
+.sec-dark .feats li{border-color:var(--line-dark)}
+.feats span{
+  display:block;
+  margin-top:.25rem;
+  font-size:.94rem;
+  font-weight:400;
+  color:var(--muted);
+}
+.sec-dark .feats span{color:var(--muted-dark)}
 
 /* ================= Kleine Karte (Prozess-Check auf der Startseite) ============ */
 .card{
@@ -508,3 +524,114 @@ img{max-width:100%;height:auto;display:block}
 }
 .foot a{text-decoration:none}
 .foot a:hover{color:var(--ink)}
+
+
+/* ================= Seitenliste (Was ist enthalten) ================= */
+.pagegrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.6rem;
+  max-width:34rem;
+  margin:0 auto 2.5rem;
+  padding:0;
+  list-style:none;
+}
+@media (min-width:38rem){ .pagegrid{grid-template-columns:repeat(3,1fr)} }
+.pagegrid li{
+  border:1px solid var(--line);
+  border-radius:11px;
+  padding:.7rem .9rem;
+  font-size:.98rem;
+  font-weight:500;
+  letter-spacing:-0.015em;
+}
+.sec-dark .pagegrid li{border-color:var(--line-dark)}
+
+.grouplabel{
+  display:block;
+  max-width:34rem;
+  margin:0 auto .9rem;
+  font-size:.82rem;
+  font-weight:500;
+  letter-spacing:.02em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.sec-dark .grouplabel{color:var(--muted-dark)}
+
+/* ================= Hinweissatz unter einem Block ================= */
+.note{
+  max-width:34rem;
+  margin:2rem auto 0;
+  font-size:1rem;
+  color:var(--muted);
+}
+.sec-dark .note{color:var(--muted-dark)}
+.note-mid{text-align:center}
+
+/* ================= Zwei Karten nebeneinander ================= */
+.cards{
+  display:grid;
+  gap:1.25rem;
+  max-width:44rem;
+  margin-inline:auto;
+  align-items:stretch;
+}
+@media (min-width:44rem){ .cards{grid-template-columns:1fr 1fr;gap:1.5rem} }
+.cards .card{max-width:none;margin:0;height:100%}
+.card-hl{border-color:var(--ink);border-width:2px}
+.card-tag{
+  display:inline-block;
+  margin-bottom:.9rem;
+  padding:.2rem .6rem;
+  border-radius:980px;
+  background:var(--ink);
+  color:var(--white);
+  font-size:.74rem;
+  font-weight:500;
+  letter-spacing:.01em;
+}
+.card-figure{
+  display:block;
+  font-size:1.9rem;
+  font-weight:600;
+  letter-spacing:-0.034em;
+  font-variant-numeric:tabular-nums;
+  line-height:1.1;
+  margin-bottom:1.1rem;
+}
+.card-figure i{
+  display:block;
+  font-style:normal;
+  font-size:.86rem;
+  font-weight:400;
+  letter-spacing:-0.011em;
+  color:var(--muted);
+  margin-top:.3rem;
+}
+.card-list{margin:0;padding:0;list-style:none;font-size:1rem}
+.card-list li{
+  padding-block:.6rem;
+  border-top:1px solid var(--line);
+  color:var(--muted);
+}
+.card-list li:first-child{border-top:0;padding-top:0}
+
+/* ================= Abschluss: Formular und direkter Draht ================= */
+.contact-split{
+  display:grid;
+  gap:2.5rem;
+  max-width:44rem;
+  margin-inline:auto;
+  align-items:start;
+}
+@media (min-width:46rem){ .contact-split{grid-template-columns:1.15fr 1fr;gap:3rem} }
+.contact-split .form{margin-top:0;max-width:none}
+.direct h3{
+  font-size:1.15rem;
+  font-weight:600;
+  letter-spacing:-0.021em;
+  margin:0 0 .55rem;
+}
+.direct p{color:var(--muted);font-size:1rem}
+.direct .btn{margin-top:.5rem}
