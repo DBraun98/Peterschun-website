@@ -154,6 +154,11 @@ img{max-width:100%;height:auto;display:block}
 @media (min-width:44rem){ .hero{padding-block:7.5rem 6rem} }
 .hero .h-display{max-width:22ch;margin-inline:auto}
 .hero .h-sub{margin:1.75rem auto 0;max-width:40ch}
+
+/* Schwebefeld: Striche, die dem Zeiger folgen. Zeichenflaeche liegt
+   hinter dem Text, nimmt keine Klicks an. Siehe assets/schwebefeld.js */
+[data-schwebefeld]{position:relative;overflow:hidden;isolation:isolate}
+.schwebefeld-canvas{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .hero-meta{
   margin-top:3.25rem;
   padding-top:1.4rem;
@@ -400,25 +405,13 @@ img{max-width:100%;height:auto;display:block}
 }
 
 /* ================= Ueber mich ================= */
+/* Ohne Foto: eine Spalte. Kommt spaeter ein Bild dazu, wird hier
+   wieder eine zweite Spalte eingefuegt. */
 .me{
-  display:grid;
-  gap:1.5rem;
-  max-width:38rem;
+  max-width:34rem;
   margin-inline:auto;
   text-align:left;
 }
-@media (min-width:36rem){
-  .me{grid-template-columns:8.5rem 1fr;gap:2.25rem;align-items:start}
-}
-.me-photo{
-  width:8.5rem;
-  height:8.5rem;
-  border-radius:50%;
-  overflow:hidden;
-  background:var(--white);
-  border:1px solid var(--line);
-}
-.me-photo img{width:100%;height:100%;object-fit:cover}
 .me-name{
   display:block;
   font-weight:600;

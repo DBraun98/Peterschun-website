@@ -39,7 +39,7 @@
 <main id="top">
 
   <!-- ---------- Kopfbereich ---------- -->
-  <section class="shell hero">
+  <section class="shell hero" data-schwebefeld data-farben="#1D1D1F,#6E6E73,#D2D2D7">
     <h1 class="h-display">Websites für lokale Dienstleister im Landkreis Diepholz</h1>
     <p class="h-sub">Eine Seite, die Ihre Kunden findet — zum Festpreis, ohne Überraschungen auf der Rechnung.</p>
     <div class="btn-row"><a class="btn" href="/website-paket/">Website-Paket ansehen</a></div>
@@ -84,13 +84,10 @@
       <div class="col-mid"><h2 class="h-sec">Eine Seite, die ich gebaut habe</h2></div>
 
       <div class="ref">
-        <!--
-          SCREENSHOT: Platzhalter unten gegen ein Bild von
-          vino-bassum.de tauschen. Datei z. B. als
-          assets/vino-bassum.jpg ablegen und src anpassen.
-        -->
         <figure class="ref-shot">
-          <img src="/assets/platzhalter-referenz.svg" alt="Screenshot der Website vino-bassum.de" width="1200" height="750">
+          <a href="https://www.vino-bassum.de" target="_blank" rel="noopener">
+            <img src="/assets/vino-bassum.webp" alt="Startseite der Website vino-bassum.de" width="1200" height="922" loading="lazy" decoding="async">
+          </a>
         </figure>
 
         <div class="ref-text">
@@ -108,25 +105,14 @@
       <div class="col-mid"><h2 class="h-sec">Wer das macht</h2></div>
 
       <div class="me">
-        <!--
-          FOTO: Platzhalter gegen ein eigenes Bild tauschen.
-          Quadratisch, z. B. 600 x 600 Pixel, als
-          assets/dennis.jpg ablegen und src anpassen.
-        -->
-        <div class="me-photo">
-          <img src="/assets/platzhalter-foto.svg" alt="Dennis Peterschun" width="400" height="400">
-        </div>
+        <span class="me-name">Dennis Peterschun</span>
+        <span class="me-place">Bassum, Landkreis Diepholz</span>
+        <p class="me-text">Hauptberuflich leite ich IT-Projekte. peterschun.com mache ich nebenbei — mit voller Aufmerksamkeit für wenige Projekte.</p>
 
-        <div>
-          <span class="me-name">Dennis Peterschun</span>
-          <span class="me-place">Bassum, Landkreis Diepholz</span>
-          <p class="me-text">Hauptberuflich leite ich IT-Projekte. peterschun.com mache ich nebenbei — mit voller Aufmerksamkeit für wenige Projekte.</p>
-
-          <ul class="me-contact">
-            <li><span>Telefon</span><a href="tel:+491777511060">0177 7511060</a></li>
-            <li><span>E-Mail</span><a href="mailto:dennis@peterschun.com">dennis@peterschun.com</a></li>
-          </ul>
-        </div>
+        <ul class="me-contact">
+          <li><span>Telefon</span><a href="tel:+491777511060">0177 7511060</a></li>
+          <li><span>E-Mail</span><a href="mailto:dennis@peterschun.com">dennis@peterschun.com</a></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -140,5 +126,6 @@
   </div>
 </footer>
 
+<script src="/assets/schwebefeld.js" defer></script>
 </body>
 </html>
