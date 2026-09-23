@@ -154,11 +154,6 @@ img{max-width:100%;height:auto;display:block}
 @media (min-width:44rem){ .hero{padding-block:7.5rem 6rem} }
 .hero .h-display{max-width:22ch;margin-inline:auto}
 .hero .h-sub{margin:1.75rem auto 0;max-width:40ch}
-
-/* Schwebefeld: Striche, die dem Zeiger folgen. Zeichenflaeche liegt
-   hinter dem Text, nimmt keine Klicks an. Siehe assets/schwebefeld.js */
-[data-schwebefeld]{position:relative;overflow:hidden;isolation:isolate}
-.schwebefeld-canvas{position:absolute;inset:0;z-index:-1;pointer-events:none}
 .hero-meta{
   margin-top:3.25rem;
   padding-top:1.4rem;
