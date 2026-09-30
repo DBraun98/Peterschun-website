@@ -193,61 +193,6 @@ img{max-width:100%;height:auto;display:block}
 }
 .textlink:hover{text-decoration-color:currentColor}
 
-/* ================= Kundensaetze ================= */
-.quotes{margin:0;padding:0;list-style:none;max-width:34rem;margin-inline:auto}
-.quotes li{
-  font-size:clamp(1.42rem,3.4vw,2.15rem);
-  font-weight:500;
-  line-height:1.28;
-  letter-spacing:-0.028em;
-  padding-block:2.1rem;
-  border-top:1px solid var(--line-dark);
-}
-.quotes li:last-child{border-bottom:1px solid var(--line-dark)}
-.quotes-note{
-  margin:2.75rem auto 0;
-  max-width:34rem;
-  color:var(--muted-dark);
-  font-size:1.02rem;
-}
-.quotes-note b{color:var(--white);font-weight:500}
-
-/* ================= Rechenbeispiel ================= */
-.ledger{
-  max-width:25rem;
-  margin:0 auto 2.75rem;
-  background:var(--white);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1.6rem 1.75rem 1.5rem;
-  text-align:left;
-}
-.ledger-row{
-  display:flex;
-  align-items:baseline;
-  justify-content:space-between;
-  gap:1.5rem;
-  font-size:.96rem;
-  color:var(--muted);
-  padding-block:.42rem;
-}
-.ledger-row b{font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
-.ledger-total{
-  margin-top:1.1rem;
-  padding-top:1.25rem;
-  border-top:1px solid var(--line);
-  text-align:center;
-}
-.ledger-figure{
-  display:block;
-  font-size:clamp(2.9rem,9vw,4.4rem);
-  font-weight:600;
-  line-height:1;
-  letter-spacing:-0.045em;
-  font-variant-numeric:tabular-nums;
-}
-.ledger-cap{margin-top:.7rem;font-size:.94rem;color:var(--muted)}
-
 /* ================= Ablauf ================= */
 .steps{margin:0 auto 2.5rem;padding:0;list-style:none;counter-reset:s;max-width:36rem;text-align:left}
 .steps li{
@@ -291,19 +236,6 @@ img{max-width:100%;height:auto;display:block}
 }
 .sec-dark .pricetag i{color:var(--muted-dark)}
 
-/* ================= Zwei Wege ================= */
-.pair{display:grid;gap:2.5rem;max-width:44rem;margin-inline:auto;text-align:left}
-@media (min-width:44rem){ .pair{grid-template-columns:1fr 1fr;gap:3.5rem} }
-.pair h3{
-  font-size:1.15rem;
-  font-weight:600;
-  letter-spacing:-0.021em;
-  margin:0 0 .55rem;
-  padding-top:1.1rem;
-  border-top:1px solid var(--line);
-}
-.pair p{color:var(--muted);font-size:1rem}
-
 /* ================= Wer ================= */
 .facts{margin:2.25rem auto 0;padding:0;list-style:none;max-width:34rem;font-size:.96rem;text-align:left}
 .facts li{
@@ -316,6 +248,8 @@ img{max-width:100%;height:auto;display:block}
 }
 .facts li:last-child{border-bottom:1px solid var(--line)}
 .facts b{font-weight:500;color:var(--ink);text-align:right}
+.sec-dark .facts li{border-color:var(--line-dark);color:var(--muted-dark)}
+.sec-dark .facts b{color:var(--white)}
 /* Auf schmalen Geraeten Wert unter die Bezeichnung, damit Preise
    nicht mitten in der Zahl umbrechen. */
 @media (max-width:30rem){
@@ -349,34 +283,6 @@ img{max-width:100%;height:auto;display:block}
   color:var(--muted);
 }
 .sec-dark .feats span{color:var(--muted-dark)}
-
-/* ================= Kleine Karte (Prozess-Check auf der Startseite) ============ */
-.card{
-  max-width:34rem;
-  margin-inline:auto;
-  background:var(--white);
-  border:1px solid var(--line);
-  border-radius:14px;
-  padding:1.75rem;
-  text-align:left;
-}
-@media (min-width:34rem){ .card{padding:2rem 2.25rem} }
-.card h2{
-  font-size:1.35rem;
-  font-weight:600;
-  letter-spacing:-0.024em;
-  line-height:1.2;
-  margin:0 0 .7rem;
-}
-.card p{color:var(--muted);font-size:1rem}
-.card-price{
-  display:block;
-  margin-bottom:1.25rem;
-  font-size:.92rem;
-  color:var(--muted);
-  font-variant-numeric:tabular-nums;
-}
-.card-foot{margin-top:1.25rem}
 
 /* ================= Referenz ================= */
 .ref{max-width:38rem;margin-inline:auto}
@@ -557,6 +463,25 @@ img{max-width:100%;height:auto;display:block}
 .sec-dark .note{color:var(--muted-dark)}
 .note-mid{text-align:center}
 
+/* ================= Karte ================= */
+.card{
+  max-width:34rem;
+  margin-inline:auto;
+  background:var(--white);
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:1.75rem;
+  text-align:left;
+}
+@media (min-width:34rem){ .card{padding:2rem 2.25rem} }
+.card h2{
+  font-size:1.35rem;
+  font-weight:600;
+  letter-spacing:-0.024em;
+  line-height:1.2;
+  margin:0 0 .7rem;
+}
+
 /* ================= Zwei Karten nebeneinander ================= */
 .cards{
   display:grid;
@@ -622,4 +547,5 @@ img{max-width:100%;height:auto;display:block}
   margin:0 0 .55rem;
 }
 .direct p{color:var(--muted);font-size:1rem}
+.direct .me-name{margin-bottom:.2rem}
 .direct .btn{margin-top:.5rem}
