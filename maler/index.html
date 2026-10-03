@@ -144,9 +144,14 @@
       <!--
         ============================================================
         FORMULAR -> BREVO
-        Gesendet wird an die action-URL des Brevo-Formulars, Ziel ist
-        das versteckte Iframe unten. Sobald die Antwort da ist,
-        schickt /assets/formular.js den Besucher auf /danke/.
+        /assets/formular.js sendet per fetch an die action-URL des
+        Brevo-Formulars und liest die Antwort aus (JSON, CORS erlaubt).
+        Nur bei success=true geht es weiter auf /danke/, sonst
+        erscheint der rote Kasten.
+
+        BETRIEBS_ID ist in Brevo ein PFLICHTFELD. Ist es leer,
+        verwirft Brevo die komplette Anfrage. Ohne Brief-Code steht
+        deshalb unten der Vorgabewert "ohne-code".
 
         VORHER IN BREVO ANLEGEN (Kontakte > Einstellungen > Attribute),
         jeweils als Typ Text:
@@ -159,8 +164,7 @@
         ============================================================
       -->
       <form class="form" id="kampagnenform" method="POST"
-            action="https://5ef05d4b.sibforms.com/serve/MUIFAOG_kzF7gEfIKlfgpd4YHilKtta9MrncFHybxe9r6CNFog4uCSdHjVOCHAi2CbDOEfI6sT3NvslYu-EPuZFCr_Xpe6YeKYNn69Cg6x83BeqYD-tVsCveq2nKJkvJA7Xu9Pe-bIutdazfl6TURyAH5Kf-Uml3NOIwUeANCVkw9rrYBLKov-1M-BVN_nUVIpWchR8IECwDxZhqCQ=="
-            target="brevo-sink" data-formular novalidate>
+            action="https://5ef05d4b.sibforms.com/serve/MUIFAOG_kzF7gEfIKlfgpd4YHilKtta9MrncFHybxe9r6CNFog4uCSdHjVOCHAi2CbDOEfI6sT3NvslYu-EPuZFCr_Xpe6YeKYNn69Cg6x83BeqYD-tVsCveq2nKJkvJA7Xu9Pe-bIutdazfl6TURyAH5Kf-Uml3NOIwUeANCVkw9rrYBLKov-1M-BVN_nUVIpWchR8IECwDxZhqCQ==" data-formular novalidate>
         <div class="field-2">
           <div class="field">
             <label for="k-name">Name</label>
@@ -212,14 +216,13 @@
         <input type="text" name="email_address_check" value="" tabindex="-1" aria-hidden="true"
                style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
         <input type="hidden" name="locale" value="de">
+        <!-- Pflichtfeld in Brevo. Leer = Anfrage wird verworfen.
+             Liegt ein Brief-Code vor, ueberschreibt kampagne.js den Wert. -->
+        <input type="hidden" name="BETRIEBS_ID" value="ohne-code">
         <input type="hidden" name="HERKUNFT" value="Brief Maler">
         <input type="hidden" name="GEWERK" value="MA">
       </form>
 
-      <!-- Nimmt die Antwort von Brevo auf. /assets/formular.js wartet auf das
-           load-Ereignis des Iframes und leitet dann auf /danke/ weiter. -->
-      <iframe name="brevo-sink" title="Formularversand" aria-hidden="true" tabindex="-1"
-              style="position:absolute;width:0;height:0;border:0;visibility:hidden"></iframe>
 
 
       <p class="form-alt" data-ort-hinweis hidden>Ihr Zeichen aus dem Brief:

@@ -3,32 +3,34 @@
    Liegt auf peterschun.com unter /assets/formular.js
 
    Gilt fuer jedes Formular mit dem Merkmal data-formular.
-   Ersetzt die frueheren Inline-Skripte der einzelnen Seiten.
 
    Ablauf:
    1. Pflichtfelder pruefen. Fehlt etwas, bleibt die Seite stehen
       und das erste fehlende Feld bekommt den Fokus.
-   2. Nativer POST in das versteckte Iframe, das im target des
-      Formulars steht. Umgeht CORS, Besucher bleibt auf der Seite.
-   3. Sobald das Iframe eine Antwort geladen hat, geht es weiter
-      auf die Dankeseite. Der Brief-Code wird mitgenommen.
-   4. Kommt binnen WARTEN keine Antwort, erscheint der Hinweis
-      mit Telefonnummer und E-Mail. Der Knopf wird wieder frei.
+   2. Versand per fetch an die action-URL des Formulars. Brevo
+      erlaubt CORS und antwortet mit JSON:
+         {"success":true, "message":"..."}
+         {"success":false,"errors":{"FELD":"..."}}
+      Die Antwort ist also lesbar — anders als frueher, als der
+      POST blind in ein verstecktes Iframe ging.
+   3. Nur bei success=true geht es weiter auf /danke/. Der
+      Brief-Code wird mitgenommen.
+   4. Bei Ablehnung, Netzfehler oder Zeitueberschreitung erscheint
+      der Hinweis mit Telefonnummer und E-Mail, der Knopf wird
+      wieder frei, und der Grund steht in der Browser-Konsole.
 
-   WICHTIGE EINSCHRAENKUNG
-   Die Antwort des Iframes liegt auf einer fremden Domain und ist
-   aus Sicherheitsgruenden nicht auslesbar. Erkannt wird deshalb
-   nur, DASS geantwortet wurde, nicht WAS. Weist der Dienst eine
-   Einsendung ab, sieht der Besucher trotzdem die Dankeseite.
-   Vollstaendig loesen laesst sich das nur mit einem Dienst, der
-   eine lesbare Antwort zurueckgibt (CORS/JSON).
+   WICHTIG — BETRIEBS_ID
+   Im Brevo-Formular ist BETRIEBS_ID ein Pflichtfeld. Ist es leer,
+   verwirft Brevo die komplette Anfrage. Jedes Formular hat deshalb
+   ein verstecktes Feld mit dem Vorgabewert "ohne-code"; liegt ein
+   Brief-Code vor, ueberschreibt ihn /assets/kampagne.js.
    ============================================================ */
 (function () {
   "use strict";
 
-  var DANKE  = "/danke/";
-  var WARTEN = 15000;           /* 15 Sekunden auf die Antwort */
-  var MAIL   = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var DANKE    = "/danke/";
+  var WARTEN   = 20000;          /* 20 Sekunden bis zum Abbruch */
+  var MAIL     = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
   var SPEICHER = "peterschun_kampagne";
 
   /* ---------- Brief-Code fuer die Dankeseite ---------- */
@@ -58,16 +60,11 @@
 
   /* ---------- Pflichtfelder ---------- */
 
-  function pflichtfelder(form) {
-    return Array.prototype.slice.call(
-      form.querySelectorAll("input[required], textarea[required], select[required]")
-    );
-  }
-
   function pruefen(form) {
     var fehlend = [];
+    var felder = form.querySelectorAll("input[required], textarea[required], select[required]");
 
-    pflichtfelder(form).forEach(function (el) {
+    Array.prototype.forEach.call(felder, function (el) {
       var leer = el.type === "checkbox" ? !el.checked : !el.value.trim();
       var mailFalsch = el.type === "email" && el.value.trim() && !MAIL.test(el.value.trim());
 
@@ -88,10 +85,6 @@
     var hinweis = form.querySelector(".form-error");
     var panne   = form.querySelector(".form-fail");
     var knopf   = form.querySelector('button[type="submit"]');
-    var rahmen  = null;
-
-    var zielName = form.getAttribute("target");
-    if (zielName) rahmen = document.querySelector('iframe[name="' + zielName + '"]');
 
     var knopfText = knopf ? knopf.textContent : "";
     var laeuft = false;
@@ -107,10 +100,11 @@
       }
     }
 
-    function abbrechen() {
+    function scheitern(grund) {
       freigeben();
       anzeigen(panne);
       if (panne) panne.scrollIntoView({ block: "center", behavior: "smooth" });
+      if (window.console) window.console.warn("[Formular] Versand nicht erfolgreich:", grund);
     }
 
     form.addEventListener("submit", function (e) {
@@ -132,22 +126,43 @@
         knopf.textContent = "Wird gesendet …";
       }
 
-      var uhr = window.setTimeout(abbrechen, WARTEN);
-
-      if (rahmen) {
-        rahmen.addEventListener("load", function () {
-          window.clearTimeout(uhr);
-          zurDankeseite();
-        }, { once: true });
-      } else {
-        /* Kein Iframe gefunden: nach kurzer Pause trotzdem weiter,
-           damit der Besucher nicht haengen bleibt. */
-        window.clearTimeout(uhr);
-        window.setTimeout(zurDankeseite, 1200);
+      /* Abbruch, falls Brevo nicht rechtzeitig antwortet. */
+      var abbruch = null;
+      var uhr = null;
+      if (typeof AbortController === "function") {
+        abbruch = new AbortController();
+        uhr = window.setTimeout(function () { abbruch.abort(); }, WARTEN);
       }
 
-      /* Nativer POST. Loest kein weiteres submit-Event aus. */
-      form.submit();
+      var auftrag = {
+        method: "POST",
+        body: new URLSearchParams(new FormData(form)),
+        headers: { "Accept": "application/json" }
+      };
+      if (abbruch) auftrag.signal = abbruch.signal;
+
+      window.fetch(form.action, auftrag)
+        .then(function (antwort) {
+          return antwort.text().then(function (text) {
+            return { ok: antwort.ok, status: antwort.status, text: text };
+          });
+        })
+        .then(function (a) {
+          if (uhr) window.clearTimeout(uhr);
+
+          var daten = null;
+          try { daten = JSON.parse(a.text); } catch (e) { /* kein JSON */ }
+
+          if (a.ok && daten && daten.success === true) {
+            zurDankeseite();
+            return;
+          }
+          scheitern("HTTP " + a.status + " — " + a.text.slice(0, 300));
+        })
+        .catch(function (fehler) {
+          if (uhr) window.clearTimeout(uhr);
+          scheitern(String(fehler));
+        });
     });
 
     form.addEventListener("input", function (e) {
