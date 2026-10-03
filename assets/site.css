@@ -549,3 +549,22 @@ img{max-width:100%;height:auto;display:block}
 .direct p{color:var(--muted);font-size:1rem}
 .direct .me-name{margin-bottom:.2rem}
 .direct .btn{margin-top:.5rem}
+
+/* ---------- Hinweis, wenn der Versand nicht geklappt hat ----------
+   Wird von /assets/formular.js eingeschaltet (Klasse "on"). */
+.form-fail{
+  display:none;
+  max-width:31rem;
+  margin:1.5rem auto 0;
+  padding:1.2rem 1.35rem;
+  border:1px solid #B3261E;
+  border-radius:12px;
+  background:#FFF4F3;
+  color:var(--ink);
+  text-align:left;
+}
+.form-fail.on{display:block}
+.form-fail b{display:block;font-weight:600;font-size:1.02rem;letter-spacing:-0.018em;margin-bottom:.35rem}
+.form-fail p{margin:0;font-size:.95rem}
+.form-fail a{color:inherit;font-weight:500}
+.sec-dark .form-fail{background:#2A1413;border-color:#E0675C;color:var(--white)}

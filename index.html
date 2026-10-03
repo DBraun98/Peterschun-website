@@ -166,7 +166,8 @@
           ============================================================
           FORMULAR -> BREVO
           Nativer POST an die action-URL, Antwort landet im
-          versteckten Iframe, damit der Besucher auf der Seite bleibt.
+          versteckten Iframe. Sobald die Antwort da ist, schickt
+          /assets/formular.js den Besucher auf /danke/.
           Kein fremdes JavaScript.
 
           HERKUNFT: Attribut (Typ Text) in Brevo anlegen, sonst wird
@@ -175,7 +176,7 @@
         -->
         <form class="form" id="paketform" method="POST"
               action="https://5ef05d4b.sibforms.com/serve/MUIFAOG_kzF7gEfIKlfgpd4YHilKtta9MrncFHybxe9r6CNFog4uCSdHjVOCHAi2CbDOEfI6sT3NvslYu-EPuZFCr_Xpe6YeKYNn69Cg6x83BeqYD-tVsCveq2nKJkvJA7Xu9Pe-bIutdazfl6TURyAH5Kf-Uml3NOIwUeANCVkw9rrYBLKov-1M-BVN_nUVIpWchR8IECwDxZhqCQ=="
-              target="brevo-sink-paket" novalidate>
+              target="brevo-sink-paket" data-formular novalidate>
           <div class="field-2">
             <div class="field">
               <label for="w-name">Name</label>
@@ -210,6 +211,13 @@
 
           <button type="submit" class="btn">Anfrage senden</button>
 
+          <div class="form-fail" role="alert">
+            <b>Das Senden hat nicht funktioniert.</b>
+            <p>Bitte rufen Sie mich an: <a href="tel:+491777511060">0177 7511060</a>.
+              Oder schreiben Sie an
+              <a href="mailto:dennis@peterschun.com">dennis@peterschun.com</a>.</p>
+          </div>
+
           <!-- Spamfalle von Brevo: muss leer bleiben, nicht entfernen. -->
           <input type="text" name="email_address_check" value="" tabindex="-1" aria-hidden="true"
                  style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
@@ -217,7 +225,8 @@
           <input type="hidden" name="HERKUNFT" value="Startseite">
         </form>
 
-        <!-- Nimmt die Antwort von Brevo auf, damit die Seite nicht wegspringt. -->
+        <!-- Nimmt die Antwort von Brevo auf. /assets/formular.js wartet auf das
+           load-Ereignis des Iframes und leitet dann auf /danke/ weiter. -->
         <iframe name="brevo-sink-paket" title="Formularversand" aria-hidden="true" tabindex="-1"
                 style="position:absolute;width:0;height:0;border:0;visibility:hidden"></iframe>
 
@@ -239,10 +248,6 @@
         </div>
       </div>
 
-      <div class="form-done" id="paketdone" role="status">
-        <b>Danke, Ihre Anfrage ist raus.</b>
-        <p>Ich melde mich innerhalb von zwei Werktagen bei Ihnen. Wenn es dringend ist, rufen Sie einfach an: 0177 7511060.</p>
-      </div>
     </div>
   </section>
 
@@ -256,52 +261,7 @@
 </footer>
 
 <script src="/assets/kampagne.js"></script>
-<script>
-(function(){
-  var form  = document.getElementById("paketform");
-  var done  = document.getElementById("paketdone");
-  var error = document.getElementById("paketerror");
-  if(!form) return;
-
-  var required = ["w-name","w-firma","w-mail","w-text","w-ok"];
-
-  function check(){
-    var bad = [];
-    required.forEach(function(id){
-      var el = document.getElementById(id);
-      var empty = el.type === "checkbox" ? !el.checked : !el.value.trim();
-      var badMail = el.type === "email" && el.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(el.value.trim());
-      if(empty || badMail){ bad.push(el); el.setAttribute("aria-invalid","true"); }
-      else { el.removeAttribute("aria-invalid"); }
-    });
-    return bad;
-  }
-
-  form.addEventListener("submit", function(e){
-    e.preventDefault();
-
-    var bad = check();
-    if(bad.length){
-      error.classList.add("on");
-      bad[0].focus();
-      return;
-    }
-    error.classList.remove("on");
-
-    // Nativer POST in das versteckte Iframe. Loest kein submit-Event
-    // aus, laeuft also nicht im Kreis, und umgeht CORS komplett.
-    form.submit();
-
-    form.style.display = "none";
-    done.classList.add("on");
-    done.scrollIntoView({block:"center", behavior:"smooth"});
-  });
-
-  form.addEventListener("input", function(e){
-    if(e.target.hasAttribute("aria-invalid")) check();
-  });
-})();
-</script>
+<script src="/assets/formular.js"></script>
 
 </body>
 </html>
