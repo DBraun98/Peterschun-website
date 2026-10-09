@@ -141,6 +141,15 @@
       el.textContent = daten.bid;
     });
 
+    /* WhatsApp-Knopf: Code in den vorbereiteten Text schreiben,
+       damit die Nachricht dem Brief zugeordnet werden kann. */
+    Array.prototype.forEach.call(document.querySelectorAll("a[data-wa]"), function (a) {
+      var basis = a.getAttribute("href").split("?")[0];
+      var text = "Hallo, ich habe Ihren Brief bekommen (Code " + daten.bid +
+                 ") und interessiere mich f\u00fcr eine Website.";
+      a.setAttribute("href", basis + "?text=" + encodeURIComponent(text));
+    });
+
     if (!ort) return;
     var gross = ort.charAt(0).toUpperCase() + ort.slice(1);
     Array.prototype.forEach.call(document.querySelectorAll(".js-ort"), function (el) {

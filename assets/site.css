@@ -96,14 +96,19 @@ img{max-width:100%;height:auto;display:block}
 }
 @media (min-width:26rem){ .bar-in{gap:1rem} }
 .bar-name{
+  display:inline-block;
+  padding-block:.8rem;
   font-weight:600;
   font-size:.88rem;
   letter-spacing:-0.015em;
   text-decoration:none;
   white-space:nowrap;
 }
-.bar-links{display:flex;gap:.6rem;font-size:.72rem}
-.bar-links a{color:var(--muted);text-decoration:none;white-space:nowrap}
+/* Tippflaeche mindestens 44 px hoch, Schrift auf dem Handy lesbar.
+   Der Abstand zwischen den Punkten kommt aus dem Innenabstand. */
+.bar-links{display:flex;font-size:.92rem;margin-right:-.55rem}
+.bar-links a{color:var(--muted);text-decoration:none;white-space:nowrap;
+  display:flex;align-items:center;min-height:2.75rem;padding:0 .55rem}
 .bar-links a:hover{color:var(--ink)}
 .bar-links a[aria-current="page"]{color:var(--ink)}
 /* Auf schmalen Geraeten wird der Vorname ausgeblendet, damit alle
@@ -112,11 +117,10 @@ img{max-width:100%;height:auto;display:block}
 @media (min-width:26rem){
   .bar-name{font-size:.95rem}
   .bar-vorname{display:inline}
-  .bar-links{gap:.9rem;font-size:.8rem}
 }
 @media (min-width:34rem){
   .bar-in{gap:1.5rem}
-  .bar-links{gap:1.5rem;font-size:.83rem}
+  .bar-links{gap:.6rem}
 }
 
 /* ================= Abschnitte ================= */
@@ -568,3 +572,39 @@ img{max-width:100%;height:auto;display:block}
 .form-fail p{margin:0;font-size:.95rem}
 .form-fail a{color:inherit;font-weight:500}
 .sec-dark .form-fail{background:#2A1413;border-color:#E0675C;color:var(--white)}
+
+/* ================= Branchenseiten =================
+   Diese Stile nutzen nur noch die Branchenseiten (/maler/ usw.).
+   Sie fehlten seit dem Umbau der Startseite am 25.09. */
+.quotes{margin:0;padding:0;list-style:none;max-width:34rem;margin-inline:auto}
+.quotes li{
+  font-size:clamp(1.3rem,3.2vw,1.9rem);
+  font-weight:500;
+  line-height:1.3;
+  letter-spacing:-0.024em;
+  padding-block:1.8rem;
+  border-top:1px solid var(--line-dark);
+}
+.quotes li:last-child{border-bottom:1px solid var(--line-dark)}
+.quotes-note{
+  margin:2.5rem auto 0;
+  max-width:34rem;
+  color:var(--muted-dark);
+  font-size:1.02rem;
+}
+.quotes-note b{color:var(--white);font-weight:500}
+.card-price{
+  display:block;
+  margin-bottom:1.25rem;
+  font-size:.92rem;
+  color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
+.card-foot{margin-top:1.25rem}
+
+/* ================= Zweiter Knopf (WhatsApp) ================= */
+.form-knoepfe{display:flex;flex-wrap:wrap;gap:.75rem;align-items:center}
+.btn-zweit{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px currentColor}
+.btn-zweit:hover{background:rgba(0,0,0,.05)}
+.sec-dark .btn-zweit{background:transparent;color:var(--white)}
+.sec-dark .btn-zweit:hover{background:rgba(255,255,255,.1)}
