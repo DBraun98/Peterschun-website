@@ -92,21 +92,21 @@ img{max-width:100%;height:auto;display:block}
   align-items:center;
   justify-content:space-between;
   gap:.75rem;
-  height:3.25rem;
+  height:3.5rem;
 }
 @media (min-width:26rem){ .bar-in{gap:1rem} }
 .bar-name{
   display:inline-block;
   padding-block:.8rem;
   font-weight:600;
-  font-size:.88rem;
+  font-size:1.02rem;
   letter-spacing:-0.015em;
   text-decoration:none;
   white-space:nowrap;
 }
 /* Tippflaeche mindestens 44 px hoch, Schrift auf dem Handy lesbar.
    Der Abstand zwischen den Punkten kommt aus dem Innenabstand. */
-.bar-links{display:flex;font-size:.92rem;margin-right:-.55rem}
+.bar-links{display:flex;font-size:1rem;margin-right:-.55rem}
 .bar-links a{color:var(--muted);text-decoration:none;white-space:nowrap;
   display:flex;align-items:center;min-height:2.75rem;padding:0 .55rem}
 .bar-links a:hover{color:var(--ink)}
@@ -115,7 +115,7 @@ img{max-width:100%;height:auto;display:block}
    drei Navigationspunkte in eine Zeile passen. */
 .bar-vorname{display:none}
 @media (min-width:26rem){
-  .bar-name{font-size:.95rem}
+  .bar-name{font-size:1.02rem}
   .bar-vorname{display:inline}
 }
 @media (min-width:34rem){
@@ -608,3 +608,21 @@ img{max-width:100%;height:auto;display:block}
 .btn-zweit:hover{background:rgba(0,0,0,.05)}
 .sec-dark .btn-zweit{background:transparent;color:var(--white)}
 .sec-dark .btn-zweit:hover{background:rgba(255,255,255,.1)}
+
+/* ================= Runde 2 (10.10.) =================
+   Sehr schmale Handys (bis 360 px): Navigation etwas enger, damit
+   Name und drei Punkte in eine Zeile passen. */
+@media (max-width:22.5rem){
+  .bar-name{font-size:.96rem}
+  .bar-links{font-size:.94rem;margin-right:-.4rem}
+  .bar-links a{padding:0 .4rem}
+}
+/* Auf dem Rechner darf die Navigation wieder etwas feiner sein. */
+@media (min-width:48rem){
+  .bar-links{font-size:.92rem}
+  .bar-name{font-size:.98rem}
+}
+/* Die beiden Knoepfe unter dem Formular: auf dem Handy je eine
+   volle Zeile, ab genug Platz nebeneinander. */
+.form-knoepfe{margin-top:.25rem}
+.form-knoepfe .btn{flex:1 1 13rem;text-align:center}
