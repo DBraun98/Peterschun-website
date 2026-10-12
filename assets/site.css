@@ -626,3 +626,29 @@ img{max-width:100%;height:auto;display:block}
    volle Zeile, ab genug Platz nebeneinander. */
 .form-knoepfe{margin-top:.25rem}
 .form-knoepfe .btn{flex:1 1 13rem;text-align:center}
+
+/* ================= Runde 3 (12.10.): Branchenseiten =================
+   Angebot und Kontakt im ersten Bildschirm, Anrufen-Knopf in der Kopfleiste. */
+.bar-call{
+  display:inline-flex;
+  align-items:center;
+  min-height:2.75rem;
+  padding:0 1.15rem;
+  border-radius:980px;
+  box-shadow:inset 0 0 0 1.5px var(--ink);
+  font-weight:500;
+  font-size:.94rem;
+  letter-spacing:-0.011em;
+  text-decoration:none;
+  white-space:nowrap;
+}
+.bar-call:hover{background:rgba(0,0,0,.05)}
+.hero-knoepfe{justify-content:center;max-width:30rem;margin:2.25rem auto 0}
+.hero-note{margin:1.1rem 0 0;font-size:.92rem;color:var(--muted)}
+/* Kontaktblock auf dunklem Grund */
+.sec-dark .direct p{color:var(--muted-dark)}
+.sec-dark .direct b{color:var(--white);font-weight:500}
+.sec-dark .me-contact li{border-color:var(--line-dark)}
+.sec-dark .me-contact span{color:var(--muted-dark)}
+/* Abstand zwischen Kontakt-Einleitung und Formular */
+#kontakt .note-mid{max-width:34rem;margin:.9rem auto 2.5rem}

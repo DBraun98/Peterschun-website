@@ -14,7 +14,8 @@
       Die Antwort ist also lesbar — anders als frueher, als der
       POST blind in ein verstecktes Iframe ging.
    3. Nur bei success=true geht es weiter auf /danke/. Der
-      Brief-Code wird mitgenommen.
+      Brief-Code wird mitgenommen. Ein Formular kann mit
+      data-danke="/verein/danke/" eine eigene Dankeseite angeben.
    4. Bei Ablehnung, Netzfehler oder Zeitueberschreitung erscheint
       der Hinweis mit Telefonnummer und E-Mail, der Knopf wird
       wieder frei, und der Grund steht in der Browser-Konsole.
@@ -51,10 +52,10 @@
     return "";
   }
 
-  function zurDankeseite() {
-    var ziel = DANKE;
+  function zurDankeseite(eigene) {
+    var ziel = eigene || DANKE;
     var code = briefCode();
-    if (code) ziel += "?bid=" + encodeURIComponent(code);
+    if (code) ziel += (ziel.indexOf("?") > -1 ? "&" : "?") + "bid=" + encodeURIComponent(code);
     window.location.assign(ziel);
   }
 
@@ -154,7 +155,7 @@
           try { daten = JSON.parse(a.text); } catch (e) { /* kein JSON */ }
 
           if (a.ok && daten && daten.success === true) {
-            zurDankeseite();
+            zurDankeseite(form.getAttribute("data-danke"));
             return;
           }
           scheitern("HTTP " + a.status + " — " + a.text.slice(0, 300));
