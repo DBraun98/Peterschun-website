@@ -652,3 +652,11 @@ img{max-width:100%;height:auto;display:block}
 .sec-dark .me-contact span{color:var(--muted-dark)}
 /* Abstand zwischen Kontakt-Einleitung und Formular */
 #kontakt .note-mid{max-width:34rem;margin:.9rem auto 2.5rem}
+
+/* ================= Startseite: Anrufen-Knopf (13.10.) =================
+   Navigation und Anrufen-Knopf nebeneinander. Auf dem Handy reicht der
+   Platz nicht fuer beides, dort bleibt nur der Knopf. */
+.bar-rechts{display:flex;align-items:center;gap:.9rem}
+@media (max-width:47.99rem){
+  .bar-rechts .bar-links{display:none}
+}
