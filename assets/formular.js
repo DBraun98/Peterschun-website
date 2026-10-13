@@ -124,7 +124,7 @@
       laeuft = true;
       if (knopf) {
         knopf.disabled = true;
-        knopf.textContent = "Wird gesendet …";
+        knopf.textContent = "Wird gesendet";
       }
 
       /* Abbruch, falls Brevo nicht rechtzeitig antwortet. */
