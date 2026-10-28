@@ -1,0 +1,42 @@
+# Laedt die Website bei jedem Push auf main per FTPS zu ALL-INKL hoch.
+# Benoetigt drei Repository-Secrets: FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
+# (Settings > Secrets and variables > Actions).
+# Der FTP-Zugang sollte im KAS auf das Verzeichnis /peterschun.com/ beschraenkt sein,
+# deshalb ist server-dir hier ./ (das Wurzelverzeichnis dieses Zugangs).
+
+name: Deploy nach ALL-INKL
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-allinkl
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Dateien hochladen
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code holen
+        uses: actions/checkout@v6
+
+      - name: Nach ALL-INKL synchronisieren
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./
+          server-dir: ./
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
+            CNAME
+            README.md
+            state/**

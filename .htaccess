@@ -1,0 +1,14 @@
+# peterschun.com auf ALL-INKL
+# Die Umleitung von http auf https erledigt das KAS ("SSL erzwingen").
+
+RewriteEngine On
+
+# www auf die Hauptadresse umleiten
+RewriteCond %{HTTP_HOST} ^www\.peterschun\.com$ [NC]
+RewriteRule ^(.*)$ https://peterschun.com/$1 [R=301,L]
+
+# Alte Seite Prozess-Check auf das Website-Paket umleiten
+RewriteRule ^prozesscheck(/.*)?$ https://peterschun.com/website-paket/ [R=301,L]
+
+# Statusdatei des automatischen Uploads nicht ausliefern
+RewriteRule ^\.ftp-deploy-sync-state\.json$ - [F,L]
