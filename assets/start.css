@@ -161,3 +161,31 @@ a:hover{color:var(--plan-dunkel)}
 .fuss{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px 32px;padding-top:48px;padding-bottom:48px;color:var(--kabel);font-size:16px}
 .fuss a{color:var(--kabel)}
 .fuss-links{display:flex;gap:24px}
+
+/* ============================================================
+   Paketseite /website-paket/ (seit 07.11.2026 im selben Stil)
+   ============================================================ */
+.zettel-preis{font-size:48px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}
+
+.paket-teil{margin-bottom:64px}
+.paket-teil:last-child{margin-bottom:0}
+.paket-teil h3{font-size:22px;margin-bottom:16px}
+
+.seiten{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));column-gap:32px;max-width:760px}
+.seiten li{border-top:1px solid var(--linie);padding:16px 0}
+
+.zeilen{list-style:none;margin:0;padding:0;max-width:760px}
+.zeilen li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 32px;border-top:1px solid var(--linie);padding:16px 0}
+.zeilen li:last-child{border-bottom:1px solid var(--linie)}
+.zeilen small{flex-basis:100%;color:var(--kabel);font-size:16px}
+.zeilen b{font-variant-numeric:tabular-nums}
+
+.optionen{display:flex;flex-wrap:wrap;gap:48px 64px}
+.option{flex:1 1 320px;max-width:480px;border-top:2px solid var(--edding);padding-top:24px}
+.option-empfohlen{border-top-color:var(--plan)}
+.option h3{font-size:22px;margin-bottom:8px}
+.option-label{color:var(--plan);font-size:16px;font-weight:700;margin-left:8px}
+.option-preis{margin:0 0 16px;font-size:36px;font-weight:700;line-height:1.1;font-variant-numeric:tabular-nums}
+.option-preis span{font-size:18px;font-weight:400;color:var(--kabel)}
+.option ul{margin:0;padding-left:24px}
+.option li{margin-bottom:8px}
